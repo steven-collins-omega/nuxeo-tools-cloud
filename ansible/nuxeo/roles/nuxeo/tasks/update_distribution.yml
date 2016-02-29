@@ -67,19 +67,19 @@
 - name: Update nuxeo.pid.dir
   lineinfile: dest={{nuxeo_conf_dir}}/nuxeo.conf line="nuxeo.pid.dir={{nuxeo_base}}/run" regexp="#?nuxeo.pid.dir\s*=.*"
   when: nuxeo_conf['nuxeo.pid.dir'] is not defined
-- name: Update templates (default)
-  lineinfile: dest={{nuxeo_conf_dir}}/nuxeo.conf line="nuxeo.templates=postgresql" regexp="#?nuxeo.templates\s*=.*"
-  when: nuxeo_conf['nuxeo.templates'] is not defined
-- name: Update nuxeo.db.host
-  lineinfile: dest={{nuxeo_conf_dir}}/nuxeo.conf line="nuxeo.db.host={{dbhost}}" regexp="#?nuxeo.db.host\s*=.*"
-- name: Update nuxeo.db.port
-  lineinfile: dest={{nuxeo_conf_dir}}/nuxeo.conf line="nuxeo.db.port={{dbport}}" regexp="#?nuxeo.db.port\s*=.*"
-- name: Update nuxeo.db.name
-  lineinfile: dest={{nuxeo_conf_dir}}/nuxeo.conf line="nuxeo.db.name={{dbname}}" regexp="#?nuxeo.db.name\s*=.*"
-- name: Update nuxeo.db.user
-  lineinfile: dest={{nuxeo_conf_dir}}/nuxeo.conf line="nuxeo.db.user={{dbuser}}" regexp="#?nuxeo.db.user\s*=.*"
-- name: Update nuxeo.db.password
-  lineinfile: dest={{nuxeo_conf_dir}}/nuxeo.conf line="nuxeo.db.password={{dbpass}}" regexp="#?nuxeo.db.password\s*=.*"
+# - name: Update templates (default)
+#   lineinfile: dest={{nuxeo_conf_dir}}/nuxeo.conf line="nuxeo.templates=postgresql" regexp="#?nuxeo.templates\s*=.*"
+#   when: nuxeo_conf['nuxeo.templates'] is not defined
+# - name: Update nuxeo.db.host
+#   lineinfile: dest={{nuxeo_conf_dir}}/nuxeo.conf line="nuxeo.db.host={{dbhost}}" regexp="#?nuxeo.db.host\s*=.*"
+# - name: Update nuxeo.db.port
+#   lineinfile: dest={{nuxeo_conf_dir}}/nuxeo.conf line="nuxeo.db.port={{dbport}}" regexp="#?nuxeo.db.port\s*=.*"
+# - name: Update nuxeo.db.name
+#   lineinfile: dest={{nuxeo_conf_dir}}/nuxeo.conf line="nuxeo.db.name={{dbname}}" regexp="#?nuxeo.db.name\s*=.*"
+# - name: Update nuxeo.db.user
+#   lineinfile: dest={{nuxeo_conf_dir}}/nuxeo.conf line="nuxeo.db.user={{dbuser}}" regexp="#?nuxeo.db.user\s*=.*"
+# - name: Update nuxeo.db.password
+#   lineinfile: dest={{nuxeo_conf_dir}}/nuxeo.conf line="nuxeo.db.password={{dbpass}}" regexp="#?nuxeo.db.password\s*=.*"
 - name: Remove packages dir (older nuxeo versions)
   file: path={{nuxeo_conf['nuxeo.data.dir']|default(nuxeo_base+'/data')}}/packages state=absent
 - name: Ensure nuxeoctl is executable
@@ -108,4 +108,3 @@
 - name: Remove old distributions
   file: path={{nuxeo_base}}/{{item}} state=absent
   with_items: old_distribs.stdout_lines
-
