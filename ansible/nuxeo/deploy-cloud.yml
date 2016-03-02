@@ -1,7 +1,7 @@
 ---
 
 # Common setup
-- hosts: db:nuxeo
+- hosts: db:nuxeo:https
   gather_facts: yes
   sudo: yes
   roles:
@@ -55,3 +55,9 @@
   roles:
   - {role: nuxeo, stage: start}
 
+# Install reverse proxy
+- hosts: https
+  gather_facts: no
+  sudo: yes
+  roles:
+  - {role: geerlingguy.nginx }
