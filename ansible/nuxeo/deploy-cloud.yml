@@ -60,4 +60,4 @@
   gather_facts: no
   sudo: yes
   roles:
-  - {role: geerlingguy.nginx }
+  - {role: https }
