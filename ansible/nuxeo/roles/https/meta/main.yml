@@ -6,9 +6,15 @@ dependencies:
       ssl:
         - ssl_certificate_key {{ssl_certs_privkey_path}}
         - ssl_certificate     {{ssl_certs_cert_path}}
+      invalid_headers:
+        - ignore_invalid_headers off
     nginx_sites:
-      default:
+      nuxeo:
+        # TODO external URL (here https://nuxeo.local) should be a
+        # variable for the https role
         - listen 443 ssl
-        - server_name nuxeo.local
-        - root "/usr/share/nginx/html"
-        - index index.html
+        - location / {
+            proxy_set_header nuxeo-virtual-host https://nuxeo.local/;
+            proxy_pass     http://localhost:8080;
+            proxy_redirect http://localhost:8080 https://nuxeo.local;
+          }
