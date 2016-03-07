@@ -5,7 +5,7 @@
   gather_facts: yes
   sudo: yes
   roles:
-  - {role: common}
+  - {role: common, tags: [ 'https' ] }
 
 # Install packages and download distribution
 - hosts: db
@@ -60,4 +60,4 @@
   gather_facts: no
   sudo: yes
   roles:
-  - {role: https }
+  - {role: https, tags: [ 'https' ] }
